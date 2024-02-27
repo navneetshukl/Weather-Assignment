@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <style>
+        body {
+            height: 100vh;
+            background-color: aquamarine;
+        }
+
+        .form-container {
+            background-color: #f8faf9;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 15% auto;
+
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #4a4a4a;
+        }
+
+        .input-container {
+            margin-bottom: 20px;
+        }
+
+        .label {
+            color: #3273dc;
+            font-weight: bold;
+        }
+
+        .input {
+            border: 1px solid #dbdbdb;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            background-color: #3273dc;
+            color: #ffffff;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #276cda;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section">
+        <div class="container">
+            <div class="columns is-centered">
+                <div class="column is-half">
+                    <form action="/" method="post">
+                        <div class="form-container">
+                            <h1 class="title">Weather Information</h1>
+                            <div class="input-container">
+                                <label class="label">Latitude</label>
+                                <div class="control">
+                                    <input class="input" type="text" name="latitude" placeholder="Enter latitude">
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                <label class="label">Longitude</label>
+                                <div class="control">
+                                    <input class="input" type="text" name="longitude" placeholder="Enter longitude">
+                                </div>
+                            </div>
+                            <div class="field is-grouped is-grouped-centered">
+                                <div class="control">
+                                    <button type="submit" class="button is-danger">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>
