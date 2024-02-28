@@ -13,13 +13,23 @@ import (
 	"github.com/navneetshukl/models"
 )
 
+// GetForm function is used to get the form page for entering latitude and longitude
 func GetForm(c *gin.Context) {
-	c.HTML(http.StatusOK, "form.page.tmpl", nil)
+	c.HTML(http.StatusOK, "form.page.tmpl", gin.H{
+		"error": false,
+	})
 }
 
+// GetTemperature function is used to get the weather data for given latitude and longitude
 func GetTemperature(c *gin.Context) {
 	lat := c.PostForm("latitude")
 	long := c.PostForm("longitude")
+	if len(lat) == 0 || len(long) == 0 {
+		c.HTML(http.StatusOK, "form.page.tmpl", gin.H{
+			"error": true,
+		})
+		return
+	}
 
 	err := godotenv.Load()
 	if err != nil {
@@ -27,7 +37,6 @@ func GetTemperature(c *gin.Context) {
 		return
 	}
 	api_key := os.Getenv("WEATHER_API_KEY")
-	fmt.Println("Api Key ", api_key)
 	URL := fmt.Sprintf("https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s&units=metric", lat, long, api_key)
 	resp, err := http.Get(URL)
 	if err != nil {
@@ -47,8 +56,11 @@ func GetTemperature(c *gin.Context) {
 		return
 	}
 	c.HTML(http.StatusOK, "response.page.tmpl", gin.H{
-		"data": weatherData.Main.Temp,
-		"area": weatherData.Name,
+		"temp":     weatherData.Main.Temp,
+		"pressure": weatherData.Main.Pressure,
+		"humidity": weatherData.Main.Humidity,
+		"wind":     weatherData.Wind.Speed,
+		"area":     weatherData.Name,
 	})
 
 }

@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
     <style>
-        body {
+        .full {
             height: 100vh;
             background-color: aquamarine;
+
         }
 
         .form-container {
@@ -62,6 +64,8 @@
 </head>
 
 <body>
+
+    <div class="full">
     <section class="section">
         <div class="container">
             <div class="columns is-centered">
@@ -88,10 +92,29 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
     </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    {{if .error}}
+    <script>
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Please Enter Latitude and Longitude",
+
+
+        });
+    </script>
+    {{end}}
+    </div>
+    
+
+
+
 </body>
 
 </html>

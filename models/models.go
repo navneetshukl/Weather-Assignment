@@ -1,5 +1,6 @@
 package models
 
+// WeatherData is struct to read the weather data
 type WeatherData struct {
 	Coord struct {
 		Lon float64 `json:"lon"`
