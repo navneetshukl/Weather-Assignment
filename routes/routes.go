@@ -41,6 +41,9 @@ func GetTemperature(c *gin.Context) {
 	resp, err := http.Get(URL)
 	if err != nil {
 		log.Println("Error in Getting the data ", err)
+		c.HTML(http.StatusOK, "form.page.tmpl", gin.H{
+			"error": true,
+		})
 		return
 	}
 	defer resp.Body.Close()
@@ -48,12 +51,20 @@ func GetTemperature(c *gin.Context) {
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Println("Error in Reading the output ", err)
+		c.HTML(http.StatusOK, "form.page.tmpl", gin.H{
+			"error": true,
+		})
+		return
 	}
 	var weatherData models.WeatherData
 	err = json.Unmarshal(body, &weatherData)
 	if err != nil {
 		log.Println("Error in unmarshalling the data ", err)
+		c.HTML(http.StatusOK, "form.page.tmpl", gin.H{
+			"error": true,
+		})
 		return
+
 	}
 	c.HTML(http.StatusOK, "response.page.tmpl", gin.H{
 		"temp":     weatherData.Main.Temp,
